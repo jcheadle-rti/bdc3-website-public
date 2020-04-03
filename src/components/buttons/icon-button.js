@@ -5,6 +5,9 @@ export const IconButton = styled.button`
     border: 0;
     padding: 0.5rem;
     cursor: pointer;
+    padding: 1rem;
+    cursor: ${ props => props.disabled ? 'default' : 'pointer' };;
+    opacity: ${ props => props.disabled ? '0.5' : '1.0' };
     display: flex;
     justify-content: center;
     align-items: center;
