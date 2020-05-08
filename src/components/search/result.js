@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ExternalLink } from '../link'
 import { useWindowWidth } from '../../hooks'
-import { Subheading } from '../typography'
+import { Paragraph, Subheading } from '../typography'
 
 const DB_GAP_URL = `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi`
 
@@ -18,23 +18,37 @@ const Wrapper = styled.div`
     }
 `
 
-const Details = styled.div`
+// Name
+
+const Name = styled(Subheading)`
+    padding: 0;
+    margin: 1rem 0 0 0.5rem;
+`
+// Details
+
+const Description = styled(Paragraph)`
+    margin: 1rem 0 1rem 0.5rem;
+`
+
+
+const Detail = styled.span`
+`
+
+// Meta details
+
+const Meta = styled.div`
+    background-color: #eee;
+    padding: 0.5rem;
+    font-size: 90%;
     display: flex;
     flex-direction: ${ props => props.compact ? 'column' : 'row' };
     justify-content: ${ props => props.compact ? 'flex-start' : 'space-between' };
     align-items: ${ props => props.compact ? 'flex-start' : 'center' };
+    ${ Detail } {
+        flex: 1;
+        padding: 0 0.25rem;
+    }
 `
-
-const Detail = styled.div`
-    flex: 1;
-    padding: 0.5rem;
-`
-
-const Name = styled(Subheading)`
-    padding: 0 0.5rem;
-`
-const Variable = styled(Detail)``
-const Study = styled(Detail)``
 
 const dbGapLink = (variable, study) => {
     // variable always has the form "phv987654321.v12.p23"
@@ -48,16 +62,20 @@ const dbGapLink = (variable, study) => {
     }
 }
 
-export const Result = ({ index, name, variable, study }) => {
+export const Result = ({ index, name, variable, study, studyId, description, instructions }) => {
     const { isCompact } = useWindowWidth()
 
     return (
         <Wrapper compact={ isCompact }>
             <Name><strong>{ index }.</strong> { name }</Name>
-            <Details compact={ isCompact }>
-                <Variable>Variable: <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Variable>
-                <Study>Study: { study }</Study>
-            </Details>
+            <Description>
+                { description }
+            </Description>
+            <Meta compact={ isCompact }>
+                <Detail>Variable: <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
+                <Detail>Study: { study }</Detail>
+                <Detail>ID: { studyId }</Detail>
+            </Meta>
         </Wrapper>
     )
 }
