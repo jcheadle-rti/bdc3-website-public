@@ -22,12 +22,12 @@ const Wrapper = styled.div`
 
 const Name = styled(Subheading)`
     padding: 0;
-    margin: 1rem 0 0 0.5rem;
+    margin: 0 0 0 1rem;
 `
 // Details
 
 const Description = styled(Paragraph)`
-    margin: 1rem 0 1rem 0.5rem;
+    margin: 1rem 0 1rem 1rem;
 `
 
 
@@ -72,9 +72,9 @@ export const Result = ({ index, name, variable, study, studyId, description, ins
                 { description }
             </Description>
             <Meta compact={ isCompact }>
-                <Detail>Variable: <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
-                <Detail>Study: { study }</Detail>
-                <Detail>ID: { studyId }</Detail>
+                <Detail><strong>Variable:</strong> <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
+                <Detail><strong>Study:</strong> { study }</Detail>
+                <Detail><strong>ID:</strong> { studyId }</Detail>
             </Meta>
         </Wrapper>
     )
