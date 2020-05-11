@@ -21,10 +21,15 @@ export const useSearch = () => {
         })
         .then(response => {
             const hits = response.data.result.total_items === 0 ? [] : response.data.result.hits.hits
-            // const hitsWithStudyProperty = hits.filter(hit => hit._source.hasOwnProperty('study'))
-            // setResults(hitsWithStudyProperty)
-            setResults(hits)
-            setTotalItems(response.data.result.total_items)
+            // START temporary result filter
+            const filteredHits = hits.filter(hit => hit._source.study_name && hit._source.var)
+            const adjustedTotalItems = response.data.result.total_items - (hits.length - filteredHits.length)
+            setResults(filteredHits)
+            setTotalItems(adjustedTotalItems)
+            // END temporary result filter
+            // below sets the original, un-filtered results:
+            // // setResults(hits)
+            // // setTotalItems(response.data.result.total_items)
             setIsLoading(false)
         })
         .catch(error => {
