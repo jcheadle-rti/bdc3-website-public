@@ -68,14 +68,10 @@ const SearchPage = () => {
             />
             
             <Title>Search BioData Catalyst</Title>
+
+             <br/><br/><br/>
              
-             <section>
-                <Heading>Search Details</Heading>
-
-                <Paragraph>
-                    Information about the search application and how it works may be useful. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores distinctio, quo quia, maiores nisi ea animi repellat natus! Molestias, voluptate minima provident dolore consequuntur esse? A vero, quibusdam facere est.
-                </Paragraph>
-
+            <section>
                 <Paragraph center>
                     <SearchInput onChange={ handleChangeQuery } onKeyDown={ handleKeyDown } value={ query } placeholder="Enter query"/>
                     { ' ' }
