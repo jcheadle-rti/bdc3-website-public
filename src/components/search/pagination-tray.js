@@ -35,10 +35,10 @@ export const PaginationTray = ({ currentPage, links, prevPageHandler, nextPageHa
             <Button aria-label={ `Go to previous page` } light disabled={ prevPageHandler === null } onClick={ prevPageHandler } style={{ padding: 0 }}>
                 <ChevronLeftIcon fill="var(--color-crimson)" size={ 24 } />
             </Button>
-            { currentPage >= 4 && <Ellipsis /> }
+            { currentPage >= 3 && <Ellipsis /> }
             {
                 links.map((link, i) => (
-                    Math.abs(currentPage - i) <= 3 && <Button
+                    Math.abs(currentPage - i) < 3 && <Button
                         key={ `page-${ i }` }
                         aria-label={ i === currentPage ? `Page ${ i + 1 }, Current page` : `Go to page ${ i + 1 }` }
                         aria-current={ i === currentPage }
@@ -49,7 +49,7 @@ export const PaginationTray = ({ currentPage, links, prevPageHandler, nextPageHa
                     </Button>
                 ))
             }
-            { currentPage < links.length - 4 && <Ellipsis /> }
+            { currentPage < links.length - 3 && <Ellipsis /> }
             <Button aria-label={ `Go to next page` } light disabled={ nextPageHandler === null } onClick={ nextPageHandler } style={{ padding: 0 }}>
                 <ChevronRightIcon fill="var(--color-crimson)" size={ 24 } />
             </Button>
