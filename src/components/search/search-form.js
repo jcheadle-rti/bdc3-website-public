@@ -20,7 +20,7 @@ export const SearchButton = styled(Button)`
 export const SearchInput = styled.input`
     background-color: #ddd;
     height: 3rem;
-    border: 1px solid #ccc;
+    border: 1px solid;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
     overflow: hidden;
@@ -30,6 +30,11 @@ export const SearchInput = styled.input`
     color: #777;
     &::placeholder {
         text-transform: uppercase;
+    }
+    border-color: var(--color-lightgrey);
+    transition: border-color 250ms;
+    &:focus {
+        border-color: var(--color-crimson);
     }
     flex: 1;
     font-weight: bold;
