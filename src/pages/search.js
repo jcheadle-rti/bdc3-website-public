@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { PageContent } from '../components/layout'
 import { SEO } from '../components/seo'
-import { Title, Heading, Paragraph } from '../components/typography'
+import { Title, Paragraph } from '../components/typography'
 import { PaginationTray, ResultsTable, SearchInput, ResultsCard, ResultsCardHeader, ResultsCardBody, ResultsCardFooter, CardTitle, ResultsCount } from '../components/search'
 import { Button } from '../components/buttons'
 import { Dots as LoadingDots } from '../components/loading'
@@ -48,16 +48,6 @@ const SearchPage = () => {
     const handleChangeQuery = event => setQuery(event.target.value)
     const handleSubmit = event => doSearch()
     const handleKeyDown = event => { if (event.keyCode === 13) doSearch() }
-
-    const PaginatedNavigation =
-        <PaginationTray
-            links={ [...Array(pageCount).keys()].map(i => goToPage(i)) }
-            currentPage={ currentPageNumber }
-            prevPageHandler={ goToPreviousPage }
-            nextPageHandler={ goToNextPage }
-            firstPageHandler={ goToFirstPage }
-            lastPageHandler={ goToLastPage }
-        />
 
     return (
         <PageContent width="95%" maxWidth="1200px" center gutters>
