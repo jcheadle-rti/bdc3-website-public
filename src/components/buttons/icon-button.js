@@ -15,4 +15,7 @@ export const IconButton = styled.button`
     &:hover, &:focus {
         filter: brightness(1.2);
     }
+    &:active {
+        filter: brightness(0.5);
+    }
 `
