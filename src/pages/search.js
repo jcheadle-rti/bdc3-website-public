@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { PageContent } from '../components/layout'
 import { SEO } from '../components/seo'
 import { Title, Paragraph } from '../components/typography'
-import { PaginationTray, ResultsTable, SearchInput, ResultsCard, ResultsCardHeader, ResultsCardBody, ResultsCardFooter, CardTitle, ResultsCount } from '../components/search'
-import { Button } from '../components/buttons'
+import { PaginationTray, ResultsTable, SearchForm, ResultsCard, ResultsCardHeader, ResultsCardBody, ResultsCardFooter, CardTitle, ResultsCount } from '../components/search'
+// import { Button } from '../components/buttons'
 import { Dots as LoadingDots } from '../components/loading'
 import { Alert } from '../components/alert'
 import { useSearch } from '../hooks'
 import { IconButton } from '../components/buttons'
-import { ChevronLeftIcon, ChevronRightIcon } from '../components/icons'
+import { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon } from '../components/icons'
 import { ShrinkWrap } from '../components/shrink-wrap'
 
 const SearchPage = () => {
@@ -59,37 +59,28 @@ const SearchPage = () => {
             
             <Title>Search BioData Catalyst</Title>
 
-             <br/><br/><br/>
-             
+            <br/><br/>
+ 
             <section>
-                <Paragraph center>
-                    <SearchInput onChange={ handleChangeQuery } onKeyDown={ handleKeyDown } value={ query } placeholder="Enter query"/>
-                    { ' ' }
-                    <Button onClick={ handleSubmit }>Submit</Button>
-                </Paragraph>
+                <SearchForm
+                    value={ query }
+                    placeholder="Enter query"
+                    changeHandler={ handleChangeQuery }
+                    submitHandler={ handleSubmit }
+                    keyDownHandler={ handleKeyDown }
+                />
                 
-                <br/><br/><br/>
-                
-                {
-                    pageCount > 1 && (
-                        <PaginationTray
-                            links={ [...Array(pageCount).keys()].map(i => goToPage(i)) }
-                            currentPage={ currentPageNumber }
-                            prevPageHandler={ goToPreviousPage }
-                            nextPageHandler={ goToNextPage }
-                            firstPageHandler={ goToFirstPage }
-                            lastPageHandler={ goToLastPage }
-                        />
-                    )
-                }
-                
+                <br/><br/>
+
                 {
                     searchedQuery && (
                         <ResultsCard>
                             <ResultsCardHeader>
+                                { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToFirstPage }><FirstPageIcon fill="#fff" size={ 24 } /></IconButton> }
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToPreviousPage }><ChevronLeftIcon fill="#fff" size={ 24 } /></IconButton> }
                                 <CardTitle>{ `${ totalItems } Results for "${ searchedQuery }"` }</CardTitle>
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1} onClick={ goToNextPage }><ChevronRightIcon fill="#fff" size={ 24 } /></IconButton> }
+                                { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1 } onClick={ goToLastPage }><LastPageIcon fill="#fff" size={ 24 } /></IconButton> }
                             </ResultsCardHeader>
                             <ShrinkWrap>
                                 { error && <Alert type="error" message={ error } /> }
@@ -98,9 +89,11 @@ const SearchPage = () => {
                                 { !error && !isLoading && results.length === 0 && <ResultsCardBody><Paragraph center>No results to display</Paragraph></ResultsCardBody> }
                             </ShrinkWrap>
                             <ResultsCardFooter>
+                                { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToFirstPage }><FirstPageIcon fill="#fff" size={ 24 } /></IconButton> }
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToPreviousPage }><ChevronLeftIcon fill="#fff" size={ 24 } /></IconButton> }
                                 { results.length > 0 && <ResultsCount>Showing results { startingIndex + 1 } to { endingIndex }</ResultsCount> }
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1} onClick={ goToNextPage }><ChevronRightIcon fill="#fff" size={ 24 } /></IconButton> }
+                                { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1 } onClick={ goToLastPage }><LastPageIcon fill="#fff" size={ 24 } /></IconButton> }
                             </ResultsCardFooter>
                         </ResultsCard>
                     )
