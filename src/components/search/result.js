@@ -74,7 +74,6 @@ export const Result = ({ index, name, variable, study, studyId, description, ins
             <Meta compact={ isCompact }>
                 <Detail><strong>Variable:</strong> <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
                 <Detail><strong>Study:</strong> { study }</Detail>
-                <Detail><strong>ID:</strong> { studyId }</Detail>
             </Meta>
         </Wrapper>
     )
