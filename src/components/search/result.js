@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ExternalLink } from '../link'
 import { useWindowWidth } from '../../hooks'
 import { Paragraph, Subheading } from '../typography'
+import { Collapser } from '../collapser'
 
 const DB_GAP_URL = `https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/variable.cgi`
 
@@ -71,10 +72,22 @@ export const Result = ({ index, name, variable, study, studyId, description, ins
             <Description>
                 { description }
             </Description>
-            <Meta compact={ isCompact }>
-                <Detail><strong>Variable:</strong> <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
-                <Detail><strong>Study:</strong> { study }</Detail>
-            </Meta>
+            <Collapser
+                titleStyle={{ backgroundColor: '#eee' }}
+                bodyStyle={{ backgroundColor: '#eee', padding: '0 1rem' }}
+                title={
+                    <Meta compact={ isCompact }>
+                        <Detail><strong>Variable:</strong> <ExternalLink to={ dbGapLink(variable, study) || null }>{ variable }</ExternalLink></Detail>
+                        <Detail><strong>Study:</strong> { study }</Detail>
+                    </Meta>
+                }
+                ariaId={ `${ index }-${ name }` }
+            >
+                <Paragraph>
+                    <strong>Instructions:</strong> { instructions }
+                </Paragraph>
+            </Collapser>
+
         </Wrapper>
     )
 }

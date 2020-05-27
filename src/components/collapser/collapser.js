@@ -52,7 +52,7 @@ const Body = styled.div(({ active, height }) => `
     opacity: ${ active ? 1 : 0 };
 `)
 
-export const Collapser = ({ title, ariaId, children }) => {
+export const Collapser = ({ title, ariaId, titleStyle, bodyStyle, children }) => {
     const [active, setActive] = useState(false)
     const [bodyHeight, setBodyHeight] = useState(0)
     const contentElement = useRef(null)
@@ -66,6 +66,7 @@ export const Collapser = ({ title, ariaId, children }) => {
     return (
         <Wrapper>
             <Header
+                style={ titleStyle }
                 active={ active }
                 onClick={ handleToggle }
                 aria-controls={ ariaId }
@@ -76,7 +77,7 @@ export const Collapser = ({ title, ariaId, children }) => {
                     <ChevronDownIcon size={ 24 } fill="var(--color-crimson)" />
                 </OpenIndicator>
             </Header>
-            <Body id={ ariaId } ref={ contentElement } active={ active } height={ bodyHeight }>
+            <Body id={ ariaId } ref={ contentElement } style={ bodyStyle } active={ active } height={ bodyHeight }>
                 { children }
             </Body>
         </Wrapper>
