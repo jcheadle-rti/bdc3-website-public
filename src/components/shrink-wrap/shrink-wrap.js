@@ -18,10 +18,6 @@ export const ShrinkWrap = ({ children }) => {
         }
     }, [children, innerRef])
 
-    useEffect(() => {
-        
-    }, [innerHeight])
-
     return (
         <Wrapper currentHeight={ innerHeight }>
             <div ref={ innerRef }>

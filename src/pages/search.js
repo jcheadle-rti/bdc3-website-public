@@ -8,8 +8,6 @@ import { Alert } from '../components/alert'
 import { useSearch } from '../hooks'
 import { IconButton } from '../components/buttons'
 import { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon } from '../components/icons'
-import { ShrinkWrap } from '../components/shrink-wrap'
-
 
 const SearchPage = () => {
     const [query, setQuery] = useState('')
@@ -82,12 +80,10 @@ const SearchPage = () => {
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1} onClick={ goToNextPage }><ChevronRightIcon fill="#fff" size={ 24 } /></IconButton> }
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === pageCount - 1 } onClick={ goToLastPage }><LastPageIcon fill="#fff" size={ 24 } /></IconButton> }
                             </ResultsCardHeader>
-                            <ShrinkWrap>
                                 { error && <Alert type="error" message={ error } /> }
                                 { !error && isLoading && <LoadingDots color="var(--color-crimson)" text="Searching..." textPlacement="top" /> }
                                 { !error && !isLoading && results.length > 0 && <ResultsTable results={ results } totalItems={ totalItems } perPage={ perPage } currentPageNumber={ currentPageNumber } /> }
                                 { !error && !isLoading && results.length === 0 && <ResultsCardBody><Paragraph center>No results to display</Paragraph></ResultsCardBody> }
-                            </ShrinkWrap>
                             <ResultsCardFooter>
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToFirstPage }><FirstPageIcon fill="#fff" size={ 24 } /></IconButton> }
                                 { pageCount > 1 && <IconButton disabled={ currentPageNumber === 0 } onClick={ goToPreviousPage }><ChevronLeftIcon fill="#fff" size={ 24 } /></IconButton> }
