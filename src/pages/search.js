@@ -3,13 +3,13 @@ import { PageContent } from '../components/layout'
 import { SEO } from '../components/seo'
 import { Title, Paragraph } from '../components/typography'
 import { PaginationTray, ResultsTable, SearchForm, ResultsCard, ResultsCardHeader, ResultsCardBody, ResultsCardFooter, CardTitle, ResultsCount } from '../components/search'
-// import { Button } from '../components/buttons'
 import { Dots as LoadingDots } from '../components/loading'
 import { Alert } from '../components/alert'
 import { useSearch } from '../hooks'
 import { IconButton } from '../components/buttons'
 import { ChevronLeftIcon, ChevronRightIcon, FirstPageIcon, LastPageIcon } from '../components/icons'
 import { ShrinkWrap } from '../components/shrink-wrap'
+
 
 const SearchPage = () => {
     const [query, setQuery] = useState('')

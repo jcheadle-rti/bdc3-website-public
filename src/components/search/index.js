@@ -1,3 +1,4 @@
+export * from './knowledge-graph'
 export * from './pagination-tray'
 export * from './result'
 export * from './results-card'
