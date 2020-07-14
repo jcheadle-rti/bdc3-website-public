@@ -90,11 +90,7 @@ export const Result = ({ index, name, variable, study, studyId, description, ins
                     <strong>Instructions:</strong> { instructions }
                 </Paragraph>
 
-                <hr color="transparent" style={{ borderBottom: '1px solid #ccc' }} />
-                
-                <Paragraph center style={{ color: '#999' }}>
-                    { graph ? <KnowledgeGraph graph={ graph } /> : <em>Knowledge Graph Unavailable</em> }
-                </Paragraph>
+                { graph && <KnowledgeGraph graph={ graph } /> }
 
             </Collapser>
 
